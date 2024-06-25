@@ -1,33 +1,45 @@
 import React, { Component } from "react";
+import "./TodoListItem.css";
 
 export default class TodoListItem extends Component {
   render() {
-    // console.log(this.props.title);
-    // console.log(this.props.delNote);
-    // console.log(this.props.toggleBold);
+    const {
+      id,
+      title,
+      lineThrough,
+      delNote,
+      onLabelClick,
+      important,
+      done,
+      onImp,
+    } = this.props;
 
-    const { id, aty, bold, lineThrough, onLabelClick } = this.props;
+    // изменяем свет orange и жирный
+    // const itemStyle = {
+    //   // fontWeight: bold ? "bold" : "normal",
+    //   // color: bold ? "Orange" : "black",
+    //   cursor: "pointer",
+    //   textDecoration: lineThrough ? "line-through" : "none",
+    // };
 
-    const itemStyle = {
-      fontWeight: bold ? "bold" : "normal",
-      color: bold ? "Orange" : "black",
-      cursor: "pointer",
-      textDecoration: lineThrough ? "line-through" : "none",
-    };
-
+    // изменяем свет orange и жирный
+    let clazz = "";
+    if (important) {
+      clazz += " imp";
+    }
+    if (done || lineThrough) {
+      clazz += " done";
+    }
     return (
       <span className="d-flex align-items-center justify-content-between">
         <span
-          className="flex-grow-1"
-          style={itemStyle}
+          className={`flex-grow-1 ${clazz}`}
+          // style={itemStyle}
           onClick={() => onLabelClick(id)}
         >
-          {aty}
+          {title}
         </span>
-        <button
-          className="btn btn-outline-danger"
-          onClick={() => this.props.delNote(this.props.id)}
-        >
+        <button className="btn btn-outline-danger" onClick={() => delNote(id)}>
           <i className="bi bi-trash"></i>
         </button>
 
@@ -39,7 +51,8 @@ export default class TodoListItem extends Component {
         </button>
         <button
           className="btn btn-outline-warning"
-          onClick={() => this.props.toggleBold(this.props.id)}
+          onClick={() => onImp(id)}
+          // onClick={() => this.props.toggleBold(this.props.id)}
           // onClick={() => toggleBold(id)}
         >
           <i className="bi bi-shield-fill-exclamation"></i>

@@ -1,0 +1,6 @@
+.main-app {
+  height: 742px;
+  /* background: conic-gradient
+    (from 45deg, red, yellow, lime, aqua, blue, magenta, red); */
+  background: radial-gradient(circle, #00ffff, #8a2be2, #8a2be2);
+}
